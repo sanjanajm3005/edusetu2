@@ -1,0 +1,361 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:aieducationapp/DoubtSolver.dart';
+import 'package:aieducationapp/ProgressSection.dart';
+
+class Homescreen extends StatefulWidget {
+  const Homescreen({super.key});
+
+  @override
+  State<Homescreen> createState() => HomescreenState();
+}
+
+class HomescreenState extends State<Homescreen> {
+  final TextEditingController targetController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF3E9FB),
+      body: Stack(
+        children: [
+          // 🟣 TOP CURVED CONTAINER
+          Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            decoration: const BoxDecoration(
+              color: Color(0xFFB589D6),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(100),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only( left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 🌟 Row: Lottie + EduSetu + Settings
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Lottie.network(
+                            'assets/animations/Graduation.json',
+                            height: 55,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "EduSetu",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.settings, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => _buildSettingsPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // 🖼️ Secondary image (below app name)
+                  Center(
+                    child: Image.network(
+                      'assets/animations/onlineLec.json', // 🔹 replace with your own image
+                      height: 110,
+                    ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // 🔍 Search bar
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search topics, videos, or notes...',
+                      hintStyle: GoogleFonts.poppins(color: Colors.grey[600]),
+                      prefixIcon:
+                          const Icon(Icons.search, color: Color(0xFFB589D6)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 15,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // 🩶 BOTTOM CONTENT SHEET
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.6,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFFF3E9FB),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 25),
+
+                    // 🏆 Olympiad Card
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(209, 245, 241, 195),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "A series of Olympiads\nfor learners worldwide 🌍",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          const Icon(Icons.emoji_events,
+                              color: Color(0xFFB589D6), size: 45),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    // 📈 Progress Section
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "📊 Your Progress",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ProgressSection(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "View All",
+                            style: TextStyle(color: Color(0xFFB589D6)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 180,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.purple.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(2, 4),
+                          ),
+                        ],
+                      ),
+                      child: ProgressSection(),
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    // 🎯 Create Target
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(172, 186, 222, 236),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "🎯 Create Your Target",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _openTargetDialog(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFB589D6),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            child: const Text("Set"),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    // ⚡ Quick Access
+                    Text(
+                      "Quick Access",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+
+                    GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      children: [
+                        _buildQuickCard(
+                          context,
+                          Icons.chat_bubble_outline,
+                          "Doubt Solver",
+                          const DoubtSolver(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // -------------------------
+  // Quick Access Helper
+  // -------------------------
+  Widget _buildQuickCard(
+      BuildContext context, IconData icon, String title, Widget page) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(225, 236, 210, 210),
+          borderRadius: BorderRadius.circular(25),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(2, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 38, color: const Color(0xFFB589D6)),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // -------------------------
+  // Settings Page
+  // -------------------------
+  Widget _buildSettingsPage() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Settings"),
+        backgroundColor: const Color(0xFFB589D6),
+      ),
+      body: const Center(
+        child: Text("Settings options coming soon ⚙"),
+      ),
+    );
+  }
+
+  // -------------------------
+  // Target Dialog
+  // -------------------------
+  void _openTargetDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("🎯 Create Your Target"),
+          content: TextField(
+            controller: targetController,
+            decoration:  InputDecoration(
+              hintText: "Enter your daily target (e.g. 2 hours of study)",
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFB589D6)),
+              onPressed: () {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content:
+                          Text("Target set: ${targetController.text}")),
+                );
+              },
+              child: const Text("Save"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

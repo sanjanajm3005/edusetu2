@@ -1,0 +1,76 @@
+// theme_manager.dart
+import 'package:flutter/material.dart';
+
+class ThemeManager extends ChangeNotifier {
+  static final ThemeManager _instance = ThemeManager._internal();
+  factory ThemeManager() => _instance;
+  ThemeManager._internal();
+
+  ThemeData _currentTheme = lavenderTheme;
+  ThemeData get currentTheme => _currentTheme;
+
+  void setTheme(String themeName) {
+    switch (themeName) {
+      case "Mint Fresh":
+        _currentTheme = mintTheme;
+        break;
+      case "Ocean Blue":
+        _currentTheme = oceanTheme;
+        break;
+      case "Sunset Glow":
+        _currentTheme = sunsetTheme;
+        break;
+      case "Lush Green":
+        _currentTheme = greenTheme;
+        break;
+      default:
+        _currentTheme = lavenderTheme;
+    }
+    notifyListeners();
+  }
+}
+
+final ThemeData lavenderTheme = ThemeData(
+  primaryColor: const Color(0xFFB589D6),
+  scaffoldBackgroundColor: const Color(0xFFF3E9FB),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFFB589D6),
+    secondary: Color(0xFFDCC7F8),
+  ),
+);
+
+final ThemeData mintTheme = ThemeData(
+  primaryColor: const Color(0xFF70C1B3),
+  scaffoldBackgroundColor: const Color(0xFFE0F2F1),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFF70C1B3),
+    secondary: Color(0xFFB2DFDB),
+  ),
+);
+
+final ThemeData oceanTheme = ThemeData(
+  primaryColor: const Color(0xFF0077B6),
+  scaffoldBackgroundColor: const Color(0xFFE0F7FA),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFF0077B6),
+    secondary: Color(0xFF90E0EF),
+  ),
+);
+
+final ThemeData sunsetTheme = ThemeData(
+  primaryColor: const Color(0xFFFF8C42),
+  scaffoldBackgroundColor: const Color(0xFFFFE8D6),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFFFF8C42),
+    secondary: Color(0xFFFFC4A3),
+  ),
+);
+
+final ThemeData greenTheme = ThemeData(
+  primaryColor: const Color(0xFF6ABF69),
+  scaffoldBackgroundColor: const Color(0xFFE8F5E9),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFF6ABF69),
+    secondary: Color(0xFFA5D6A7),
+  ),
+);

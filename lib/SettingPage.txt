@@ -1,0 +1,52 @@
+// settings_page.dart
+import 'package:aieducationapp/Thememanager.txt';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final themeManager = Provider.of<ThemeManager>(context);
+    final themes = ["Lavender Dream", "Mint Fresh", "Ocean Blue", "Sunset Glow", "Lush Green"];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Settings")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Text("Select Theme:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 15),
+            for (final themeName in themes)
+              ListTile(
+                title: Text(themeName),
+                trailing: themeManager.currentTheme.primaryColor ==
+                        _getThemeColor(themeName)
+                    ? const Icon(Icons.check, color: Colors.green)
+                    : null,
+                onTap: () => themeManager.setTheme(themeName),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color _getThemeColor(String themeName) {
+    switch (themeName) {
+      case "Mint Fresh":
+        return const Color(0xFF70C1B3);
+      case "Ocean Blue":
+        return const Color(0xFF0077B6);
+      case "Sunset Glow":
+        return const Color(0xFFFF8C42);
+      case "Lush Green":
+        return const Color(0xFF6ABF69);
+      default:
+        return const Color(0xFFB589D6);
+    }
+  }
+}

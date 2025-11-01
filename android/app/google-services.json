@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "259554552827",
+    "project_id": "aieducationnapp",
+    "storage_bucket": "aieducationnapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259554552827:android:46a86a1ed9fab4bcc4b95e",
+        "android_client_info": {
+          "package_name": "com.example.ai_edu_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMZBmnghraoyTmqpWpifjMMavLwfNb-6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
